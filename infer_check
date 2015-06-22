@@ -1,0 +1,15 @@
+#!/bin/sh
+
+check_infer(){
+  ISSUE="$(infer -- ./gradlew build)"
+  if echo "${ISSUE}" | grep -q "No Issues Found"
+    then return 0
+    else return 1
+  fi
+}
+
+CLEAN="$(./gradlew clean)"
+CHECK=$(check_infer)
+echo ${CHECK}
+exit 1
+  
